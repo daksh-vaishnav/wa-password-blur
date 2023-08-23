@@ -1,0 +1,32 @@
+{
+	"manifest_version": 3,
+	"name": "ProtectCE",
+	"description": "restrict whatsapp web without password ",
+	"version": "1.0.0",
+	"action": {
+		"default_title": "watch the Chrome DevTools' console",
+		"default_popup": "popup/popup.html",
+		"default_icon": "images/icon.png"
+	},
+	"content_scripts": [
+		{
+			"run_at": "document_start",
+			"js": ["script/before.js"],
+			"matches": ["https://web.whatsapp.com/*", "https://notion.so/*"]
+		},
+		{
+			"run_at": "document_idle",
+			"js": ["script/after.js"],
+			"matches": [
+				"https://web.whatsapp.com/*",
+				"https://notion.so/*",
+				"http://*/*"
+			]
+		}
+	],
+	"background": {
+		"service_worker": "background.js"
+	},
+	"permissions": ["tabs", "scripting", "activeTab", "storage"],
+	"host_permissions": ["https://*/*", "http://*/*"]
+}
