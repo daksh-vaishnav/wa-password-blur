@@ -4,27 +4,26 @@
 })();
 
 chrome.storage.sync.get("password", ({ password }) => {
-	start_position: while (true) {
+	function enterPassword() {
 		let enteredPassword = prompt(
 			"Enter the password to access the website:",
 			""
 		);
 		if (enteredPassword === password) {
-			enteredPassword = true;
 			const interval = setInterval(() => {
 				const divElements = document.querySelectorAll("._1AHcd"); // Replace with your class name
-
 				if (divElements.length > 0) {
 					clearInterval(interval); // Clear the interval when the class is found
-					modifyCSS(); // Call the function to modify the CSS
+					modifyCSSContactList(); // Call the function to modify the CSS
 				}
 			}, 2000); // Check every 2 sec
-			break;
+			return;
 		} else {
 			alert("Incorrect password. Access denied.");
-			continue start_position;
+			enterPassword();
 		}
 	}
+	enterPassword();
 });
 
 function modifyCSS() {
